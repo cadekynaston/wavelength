@@ -8,10 +8,10 @@ const CategoryCard = () => {
       <div className="absolute top-6 left-0 right-0">
         <Image src={arrow} alt='arrow' />
       </div>
-      <div className='bg-gold-400 h-auto w-1/2 pt-20 pb-5 px-4 rounded-tl-sm rounded-bl-sm'>
-        <p>Useless in an emergency (this is some long text to see how it looks)</p>
+      <div className='bg-gold-400 h-auto w-1/2 pt-20 pb-9 px-4 rounded-tl-sm rounded-bl-sm'>
+        <p>Useless in an emergency</p>
       </div>
-      <div className='bg-tan-100 h-auto w-1/2 pt-20 pb-5 px-4 rounded-tr-sm rounded-br-sm'>
+      <div className='bg-tan-100 h-auto w-1/2 pt-20 pb-9 px-4 rounded-tr-sm rounded-br-sm'>
         <p>Useful in an emergency</p>
       </div>
     </div>

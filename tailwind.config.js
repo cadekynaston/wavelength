@@ -38,7 +38,11 @@ module.exports = {
         40: '#999'
       }
     },
-    extend: {},
+    extend: {
+      spacing: {
+        '1200': '1200px',
+      }
+    },
   },
   plugins: [],
 }

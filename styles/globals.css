@@ -19,3 +19,30 @@ a {
 * {
   box-sizing: border-box;
 }
+
+
+
+.slider {
+  width: 520px
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 48px;
+  height: 48px;
+  border: 0;
+  background: url('/drag.png');
+  cursor: pointer
+}
+
+
+.slider::-moz-range-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 48px;
+  height: 48px;
+  border: 0;
+  background: url('/drag.png');
+  cursor: pointer
+}
