@@ -30,7 +30,6 @@ const Lobby = () => {
             <p>One player from the active team-the Psychic- knows where the target is, but can only give a clue ON THE SPECTRUM between two opposing concepts. After that, their team- mates have to guess where the target is.</p>
           </div>
           <div>
-            <p className="text-white text-4xl font-bold text-center">Players</p>
             <PlayerList />
           </div>
           <div className='text-right w-44'>

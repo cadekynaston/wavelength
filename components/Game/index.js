@@ -28,10 +28,11 @@ export default function Home() {
       <div className='relative w-1200 mx-auto flex'>
         <div>
           <UserLegend />
+          <div className='mb-80'></div>
           <PlayerList />
         </div>
         <div
-          className='relative mb-10 flex flex-col align-center flex-grow justify-center'
+          className='relative mb-10 flex flex-col align-center flex-grow mt-12'
         >
           <div
             className='mx-auto mb-8'
