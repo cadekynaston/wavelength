@@ -6,6 +6,7 @@ export function AppWrapper({ children }) {
 
   const [gameStarted, setGameStarted] = useState(false)
   const [socketId, setSocketId] = useState(1)
+  const [pointerPosition, setPointerPosition] = useState(50)
   const [players, setPlayers] = useState([
     { id: 0, name: 'player 1' },
     { id: 1, name: 'player 2' },
@@ -18,7 +19,9 @@ export function AppWrapper({ children }) {
     players,
     setPlayers,
     socketId,
-    setSocketId
+    setSocketId,
+    pointerPosition,
+    setPointerPosition
   }
 
   return (

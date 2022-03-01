@@ -40,6 +40,7 @@ module.exports = {
     },
     extend: {
       spacing: {
+        '600': '600px',
         '1200': '1200px',
       }
     },
