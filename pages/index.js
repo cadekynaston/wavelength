@@ -1,10 +1,9 @@
+import { useEffect } from 'react'
+import { io } from "socket.io-client";
 import dynamic from 'next/dynamic';
 import { useAppContext } from '../contexts/AppContext';
 import Lobby from '../components/Lobby';
 import Game from '../components/Game'
-import { io } from "socket.io-client";
-
-const socket = io("https://chg-wavelength-service.herokuapp.com/");
 
 // import ReactSpeedometer from 'react-d3-speedometer'
 const ReactSpeedometer = dynamic(
@@ -14,13 +13,23 @@ const ReactSpeedometer = dynamic(
 
 
 export default function Home() {
-  const { gameStarted } = useAppContext()
+  const { gameStarted, setSocket, socket, setPlayers } = useAppContext()
 
-  socket.on("hello", (data) => {
-    console.log(socket.id)
-    console.log('we got an event!')
-    console.log(data);
-  });
+
+  useEffect(() => {
+    const newSocket = io(`https://chg-wavelength-service.herokuapp.com/`);
+    setSocket(newSocket);
+    return () => newSocket.close();
+  }, [setSocket]);
+
+  useEffect(() => {
+    if (socket) {
+      socket.on('players-updated', (data) => {
+        setPlayers(data[0])
+      });
+    }
+  }, [socket]);
+
   if (gameStarted) {
     return (
       <Game />

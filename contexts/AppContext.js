@@ -6,13 +6,14 @@ export function AppWrapper({ children }) {
 
   const [gameStarted, setGameStarted] = useState(false)
   const [socketId, setSocketId] = useState(1)
-  const [psychicId, setPsychicId] = useState(2)
+  const [psychicId, setPsychicId] = useState(1)
   const [pointerPosition, setPointerPosition] = useState(50)
-  const [players, setPlayers] = useState([
-    { id: 0, name: 'player 1' },
-    { id: 1, name: 'player 2' },
-    { id: 2, name: 'player 3' },
-  ])
+  const [clueSubmitted, setClueSubmitted] = useState(false)
+  const [clue, setClue] = useState('')
+  const [guessSubmitted, setGuessSubmitted] = useState(false)
+  const [socket, setSocket] = useState(undefined)
+  const [concepts, setConcepts] = useState(['Useless in an emergency', 'Useful in an emergency'])
+  const [players, setPlayers] = useState([[]])
 
   let sharedState = {
     gameStarted,
@@ -24,7 +25,17 @@ export function AppWrapper({ children }) {
     pointerPosition,
     setPointerPosition,
     psychicId,
-    setPsychicId
+    setPsychicId,
+    clueSubmitted,
+    setClueSubmitted,
+    guessSubmitted,
+    setGuessSubmitted,
+    clue,
+    setClue,
+    concepts,
+    setConcepts,
+    socket,
+    setSocket
   }
 
   return (

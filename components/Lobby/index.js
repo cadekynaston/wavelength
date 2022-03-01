@@ -8,17 +8,12 @@ import Button from '../Button'
 const Lobby = () => {
 
   const { setGameStarted, players } = useAppContext()
-  const [gameCanStart, setGameCanStart] = useState(true)
+
 
   const startGame = () => {
     setGameStarted(true)
   }
-
-  useEffect(() => {
-    if (players.length > 1) {
-      setGameCanStart(true)
-    }
-  }, [players.length])
+  const gameCanStart = players.length > 1
   return (
     <div className='flex justify-center'>
       <div className='w-1200'>

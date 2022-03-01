@@ -1,12 +1,14 @@
 import dynamic from 'next/dynamic';
 import { useState } from 'react'
-import UserLegend from '../UserLegend';
+import InfoPane from '../InfoPane';
 import Concepts from '../Concepts';
 import { generateSegments } from '../../utils/generateSegments';
 import PlayerList from '../PlayerList'
 import Button from '../Button';
 import RangeSlider from '../RangeSlider';
 import { useAppContext } from '../../contexts/AppContext';
+import Form from '../Form';
+import ReadOnlyInput from '../Form/ReadOnlyInput';
 // import ReactSpeedometer from 'react-d3-speedometer'
 const ReactSpeedometer = dynamic(
   () => import('react-d3-speedometer'),
@@ -16,18 +18,26 @@ const ReactSpeedometer = dynamic(
 
 export default function Home() {
 
-  const { pointerPosition } = useAppContext()
+  const { pointerPosition, psychicId, socketId, setClueSubmitted, clueSubmitted, setClue, clue } = useAppContext()
   const [showSegments, setShowSegments] = useState(false)
+
+  const isPsychic = psychicId === socketId
 
   const handleClick = () => {
     console.log('clicked submit')
     setShowSegments(true)
   }
+  const handleClueSubmit = ({ value }) => {
+    console.log('clue submitted:', value)
+    setClueSubmitted(true);
+    setClue(value)
+  }
+
   return (
     <main>
       <div className='relative w-1200 mx-auto flex'>
         <div>
-          <UserLegend />
+          <InfoPane />
           <div className='mb-80'></div>
           <PlayerList />
         </div>
@@ -60,10 +70,27 @@ export default function Home() {
           </div>
 
           <div className='relative'>
-            <RangeSlider />
-            <div className='absolute right-16' style={{ top: '-18px' }}>
-              <Button onClick={handleClick}>Submit</Button>
-            </div>
+            {!isPsychic &&
+              <div>
+                <RangeSlider />
+                <div className='absolute right-16' style={{ top: '-18px' }}>
+                  <Button onClick={handleClick}>Submit</Button>
+                </div>
+              </div>
+            }
+
+            {isPsychic && !clueSubmitted &&
+              <div className='mx-auto'>
+                <Form label="Your Clue" buttonText='Share Clue' onSubmit={handleClueSubmit} />
+              </div>
+            }
+
+            {isPsychic && clueSubmitted &&
+              <div className='mx-auto'>
+                <ReadOnlyInput label="Your Clue" value={clue} />
+              </div>
+            }
+
           </div>
         </div>
       </div>

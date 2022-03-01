@@ -1,4 +1,4 @@
-import React from 'react'
+// import { useEffect } from 'react'
 import { useAppContext } from '../../contexts/AppContext'
 import Image from 'next/image'
 import psychicAvatar from '../../public/avatars/psychic.svg'
@@ -10,12 +10,11 @@ const PlayerList = () => {
   return (
     <div>
       <p className="text-white text-4xl font-bold text-center">Players</p>
-
-      {players.map(player => {
+      {players.map((player, i) => {
         const isMe = player.id === socketId
         const isPsychic = player.id === psychicId
         return (
-          <div key={player.id}>
+          <div key={player.id + i}>
             <hr style={{ height: 2 }} className='bg-indigo-200 mt-4 w-80' />
             <div className='relative'>
               <div className='absolute' style={{ top: -8, left: 5 }}>
