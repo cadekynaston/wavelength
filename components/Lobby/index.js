@@ -38,8 +38,8 @@ const Lobby = () => {
             <p className='text-white text-xs whitespace-nowrap'>Waiting for everyone to join</p>
 
             <div className='text-left w-80 mt-8 text-indigo-100 text-sm'>
-              <p className='mb-4'>Wavelength is a social guessing game where two teams compete to read each other's minds.</p>
-              <p className='mb-4'> Teams take turns rotating a dial to where they think a target is located along a spectrum that's hidden behind a screen.</p>
+              <p className='mb-4'>Wavelength is a social guessing game where two teams compete to read each other&apos;s minds.</p>
+              <p className='mb-4'> Teams take turns rotating a dial to where they think a target is located along a spectrum that&apos;s hidden behind a screen.</p>
               <p>One player from the active team-the Psychic- knows where the target is, but can only give a clue ON THE SPECTRUM between two opposing concepts. After that, their team- mates have to guess where the target is.</p>
             </div>
 
