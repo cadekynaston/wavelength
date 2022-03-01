@@ -5,10 +5,17 @@ const AppContext = createContext();
 export function AppWrapper({ children }) {
 
   const [gameStarted, setGameStarted] = useState(false)
+  const [players, setPlayers] = useState([
+    { id: 0, name: 'player 1' },
+    { id: 1, name: 'player 2' },
+    { id: 2, name: 'player 3' },
+  ])
 
   let sharedState = {
     gameStarted,
-    setGameStarted
+    setGameStarted,
+    players,
+    setPlayers
   }
 
   return (
