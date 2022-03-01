@@ -13,11 +13,12 @@ const ReactSpeedometer = dynamic(
 
 
 export default function Home() {
-  const { gameStarted, setSocket, socket, setPlayers } = useAppContext()
+  const { gameStarted, setSocket, setSocketId, socket, setPlayers } = useAppContext()
 
 
   useEffect(() => {
     const newSocket = io(`https://chg-wavelength-service.herokuapp.com/`);
+    console.log(newSocket)
     setSocket(newSocket);
     return () => newSocket.close();
   }, [setSocket]);
@@ -25,8 +26,14 @@ export default function Home() {
   useEffect(() => {
     if (socket) {
       socket.on('players-updated', (data) => {
+        console.log('players-updated')
         setPlayers(data[0])
       });
+
+      socket.on('connect', () => {
+        console.log('connect', socket)
+        setSocketId(socket.id)
+      })
     }
   }, [socket]);
 
