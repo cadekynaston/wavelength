@@ -27,6 +27,7 @@ export default function Home() {
     setPointerPosition,
     setTarget,
     setGuessSubmitted,
+    setRoundEnded,
   } = useAppContext()
 
 
@@ -57,6 +58,8 @@ export default function Home() {
         setClue(undefined)
         setGuessSubmitted(false)
         setTarget(0)
+        setNeedleGrabbed(false)
+        setRoundEnded(false)
       })
 
       socket.on('needle-grabbed', (data) => {
@@ -82,7 +85,7 @@ export default function Home() {
         setGameStarted(false)
       })
 
-      socket.on('reveal-target', (data) => {
+      socket.on('target-revealed', (data) => {
         console.log('reveal-target', data)
         setTarget(data * 100)
       })
@@ -90,7 +93,8 @@ export default function Home() {
       socket.on('round-ended', (data) => {
         console.log('round-ended', data)
         setGuessSubmitted(true)
-        setTarget(50)
+        setNeedleGrabbed(true)
+        setRoundEnded(true)
       })
 
       socket.on('clue-revealed', data => {

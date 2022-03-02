@@ -12,6 +12,7 @@ export function AppWrapper({ children }) {
   const [target, setTarget] = useState(false)
   const [socket, setSocket] = useState(undefined)
   const [needleGrabbed, setNeedleGrabbed] = useState(false)
+  const [roundEnded, setRoundEnded] = useState(false)
   const [concepts, setConcepts] = useState(['Useless in an emergency', 'Useful in an emergency'])
   const [players, setPlayers] = useState([[]])
 
@@ -36,6 +37,8 @@ export function AppWrapper({ children }) {
     setNeedleGrabbed,
     target,
     setTarget,
+    roundEnded,
+    setRoundEnded
   }
 
   return (

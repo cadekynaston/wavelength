@@ -18,7 +18,7 @@ const ReactSpeedometer = dynamic(
 
 export default function Home() {
 
-  const { pointerPosition, psychicId, setGameStarted, target, clue, socket, setNeedleGrabbed } = useAppContext()
+  const { pointerPosition, psychicId, setGameStarted, target, clue, socket, setNeedleGrabbed, roundEnded } = useAppContext()
 
   const isPsychic = psychicId === socket.id
 
@@ -75,7 +75,7 @@ export default function Home() {
               <div>
                 <RangeSlider />
                 {
-                  clue &&
+                  clue && !roundEnded &&
                   <div className='absolute right-16' style={{ top: '-18px' }}>
                     <Button onClick={handleGuessSubmit}>Submit</Button>
                   </div>
