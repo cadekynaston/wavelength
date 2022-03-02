@@ -111,10 +111,6 @@ export default function Home() {
         setNeedleGrabbed(false)
       }}>end-game</button>
 
-      <button className="text-white" onClick={() => {
-        socket.emit('release-needle')
-        console.log('release-needle')
-      }}>release-needle</button>
 
       <button className="text-white" onClick={() => {
         socket.emit('end-round')
