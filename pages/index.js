@@ -44,8 +44,7 @@ export default function Home() {
 
       socket.on('needle-grabbed', (data) => {
         console.log('needle-grabbed', data)
-        console.log(socketId)
-        if (data !== socketId) {
+        if (data !== socket.id) {
           console.log('setNeedleGrabbed')
           setNeedleGrabbed(true)
         }
