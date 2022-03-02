@@ -18,7 +18,7 @@ const ReactSpeedometer = dynamic(
 
 export default function Home() {
 
-  const { pointerPosition, psychicId, socketId, setClueSubmitted, clueSubmitted, setClue, clue } = useAppContext()
+  const { pointerPosition, psychicId, socketId, setClueSubmitted, setGameStarted, clueSubmitted, setClue, clue, socket, setNeedleGrabbed } = useAppContext()
   const [showSegments, setShowSegments] = useState(false)
 
   const isPsychic = psychicId === socketId
@@ -94,6 +94,17 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <button className="text-white" onClick={() => {
+        socket.emit('end-game')
+        console.log('end-game')
+        setGameStarted(false)
+        setNeedleGrabbed(false)
+      }}>endgame</button>
+
+      <button className="text-white" onClick={() => {
+        socket.emit('release-needle')
+        console.log('release-needle')
+      }}>release-needle</button>
     </main>
   )
 }

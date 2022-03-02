@@ -12,6 +12,7 @@ export function AppWrapper({ children }) {
   const [clue, setClue] = useState('')
   const [guessSubmitted, setGuessSubmitted] = useState(false)
   const [socket, setSocket] = useState(undefined)
+  const [needleGrabbed, setNeedleGrabbed] = useState(false)
   const [concepts, setConcepts] = useState(['Useless in an emergency', 'Useful in an emergency'])
   const [players, setPlayers] = useState([[]])
 
@@ -35,7 +36,9 @@ export function AppWrapper({ children }) {
     concepts,
     setConcepts,
     socket,
-    setSocket
+    setSocket,
+    needleGrabbed,
+    setNeedleGrabbed,
   }
 
   return (

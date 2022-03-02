@@ -7,12 +7,14 @@ import Button from '../Button'
 
 const Lobby = () => {
 
-  const { setGameStarted, players } = useAppContext()
+  const { players, socket } = useAppContext()
 
 
   const startGame = () => {
-    setGameStarted(true)
+    console.log('start-round emitted')
+    socket.emit('start-round')
   }
+
   const gameCanStart = players.length > 1
   return (
     <div className='flex justify-center'>

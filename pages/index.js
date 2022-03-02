@@ -13,7 +13,7 @@ const ReactSpeedometer = dynamic(
 
 
 export default function Home() {
-  const { gameStarted, setSocket, setSocketId, socket, setPlayers } = useAppContext()
+  const { gameStarted, setSocket, setPsychicId, setSocketId, socket, setPlayers, socketId, setGameStarted, setConcepts, setNeedleGrabbed, setPointerPosition } = useAppContext()
 
 
   useEffect(() => {
@@ -34,6 +34,32 @@ export default function Home() {
         console.log('connect', socket)
         setSocketId(socket.id)
       })
+
+      socket.on('round-started', (data) => {
+        console.log('round-started', data)
+        setGameStarted(true)
+        setConcepts(data.concepts)
+        setPsychicId(data.psychic)
+      })
+
+      socket.on('needle-grabbed', (data) => {
+        console.log('needle-grabbed', data)
+        console.log(socketId)
+        if (data !== socketId) {
+          console.log('setNeedleGrabbed')
+          setNeedleGrabbed(true)
+        }
+      })
+
+      socket.on('needle-released', (data) => {
+        console.log('needle-released', data)
+        setNeedleGrabbed(false)
+      })
+
+      socket.on('needle-moved', (data) => {
+        console.log('needle-moved', data)
+        setPointerPosition(data * 100)
+      })
     }
   }, [socket]);
 
@@ -45,4 +71,5 @@ export default function Home() {
   return (
     <Lobby />
   )
+
 }

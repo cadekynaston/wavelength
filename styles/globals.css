@@ -46,3 +46,11 @@ a {
   background: url('/drag.png');
   cursor: pointer
 }
+
+.disabled.slider::-webkit-slider-thumb {
+  background: url('/drag-disabled.svg');
+}
+
+.disabled.slider::-moz-range-thumb {
+  background: url('/drag-disabled.svg');
+}
