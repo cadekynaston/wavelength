@@ -13,7 +13,7 @@ const ReactSpeedometer = dynamic(
 
 
 export default function Home() {
-  const { gameStarted, setSocket, setPsychicId, setSocketId, socket, setPlayers, socketId, setGameStarted, setConcepts, setNeedleGrabbed, setPointerPosition } = useAppContext()
+  const { gameStarted, setSocket, setPsychicId, setClue, socket, setPlayers, setGameStarted, setConcepts, setNeedleGrabbed, setPointerPosition, setTarget } = useAppContext()
 
 
   useEffect(() => {
@@ -30,10 +30,10 @@ export default function Home() {
         setPlayers(data[0])
       });
 
-      socket.on('connect', () => {
-        console.log('connect', socket)
-        setSocketId(socket.id)
-      })
+      // socket.on('connect', () => {
+      //   console.log('connect', socket)
+      //   setSocketId(socket.id)
+      // })
 
       socket.on('round-started', (data) => {
         console.log('round-started', data)
@@ -64,8 +64,26 @@ export default function Home() {
         console.log('game-ended')
         setGameStarted(false)
       })
+
+      socket.on('reveal-target', (data) => {
+        console.log('reveal-target', data)
+        setTarget(data * 100)
+      })
+
+      socket.on('round-ended', (data) => {
+        console.log('round-ended', data)
+        setTarget(50)
+      })
+
+      socket.on('clue-revealed', data => {
+        setClue(data)
+      })
     }
   }, [socket]);
+
+  if (!socket) {
+    return 'connecting to socket...'
+  }
 
   if (gameStarted) {
     return (

@@ -7,14 +7,14 @@ import Button from '../Button'
 
 const InfoPane = () => {
 
-  const { socketId, psychicId, clueSubmitted, guessSubmitted } = useAppContext()
-  const isPsychic = socketId === psychicId
+  const { socket, psychicId, clue, guessSubmitted } = useAppContext()
+  const isPsychic = socket.id === psychicId
 
-  let helpText = 'Drag the slider to where you think the psychic is expecting the target area'
+  let helpText = 'Psychic is thinking... You will need to guess where to place the red dial after they share the clue.'
   if (isPsychic) {
     helpText = 'Share your clue to help guessers place the red dial in the blue target area.'
   }
-  if (isPsychic && clueSubmitted) {
+  if (isPsychic && clue) {
     helpText = 'Guesser(s) are guessing...'
   }
   if (isPsychic && guessSubmitted) {
@@ -23,6 +23,10 @@ const InfoPane = () => {
   if (!isPsychic && guessSubmitted) {
     helpText = 'See the results!'
   }
+  if (!isPsychic && clue) {
+    helpText = 'Drag the slider to where you think the psychic is expecting the target area.'
+  }
+
   return (
     <div className='w-80'>
       <div className='flex mb-1'>

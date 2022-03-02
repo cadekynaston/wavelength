@@ -5,12 +5,11 @@ const AppContext = createContext();
 export function AppWrapper({ children }) {
 
   const [gameStarted, setGameStarted] = useState(false)
-  const [socketId, setSocketId] = useState(1)
   const [psychicId, setPsychicId] = useState(1)
   const [pointerPosition, setPointerPosition] = useState(50)
-  const [clueSubmitted, setClueSubmitted] = useState(false)
-  const [clue, setClue] = useState('')
+  const [clue, setClue] = useState(undefined)
   const [guessSubmitted, setGuessSubmitted] = useState(false)
+  const [target, setTarget] = useState(false)
   const [socket, setSocket] = useState(undefined)
   const [needleGrabbed, setNeedleGrabbed] = useState(false)
   const [concepts, setConcepts] = useState(['Useless in an emergency', 'Useful in an emergency'])
@@ -21,14 +20,10 @@ export function AppWrapper({ children }) {
     setGameStarted,
     players,
     setPlayers,
-    socketId,
-    setSocketId,
     pointerPosition,
     setPointerPosition,
     psychicId,
     setPsychicId,
-    clueSubmitted,
-    setClueSubmitted,
     guessSubmitted,
     setGuessSubmitted,
     clue,
@@ -39,6 +34,8 @@ export function AppWrapper({ children }) {
     setSocket,
     needleGrabbed,
     setNeedleGrabbed,
+    target,
+    setTarget,
   }
 
   return (

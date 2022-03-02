@@ -5,13 +5,13 @@ import psychicAvatar from '../../public/avatars/psychic.svg'
 import userAvatar from '../../public/avatars/user.svg'
 
 const PlayerList = () => {
-  const { players, socketId, psychicId } = useAppContext()
+  const { players, socket, psychicId } = useAppContext()
 
   return (
     <div>
       <p className="text-white text-4xl font-bold text-center">Players</p>
       {players.map((player, i) => {
-        const isMe = player.id === socketId
+        const isMe = player.id === socket.id
         const isPsychic = player.id === psychicId
         return (
           <div key={player.id + i}>

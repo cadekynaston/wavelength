@@ -18,20 +18,21 @@ const ReactSpeedometer = dynamic(
 
 export default function Home() {
 
-  const { pointerPosition, psychicId, socketId, setClueSubmitted, setGameStarted, clueSubmitted, setClue, clue, socket, setNeedleGrabbed } = useAppContext()
-  const [showSegments, setShowSegments] = useState(false)
+  const { pointerPosition, psychicId, setGameStarted, target, clue, socket, setNeedleGrabbed } = useAppContext()
 
-  const isPsychic = psychicId === socketId
+  const isPsychic = psychicId === socket.id
 
-  const handleClick = () => {
-    console.log('clicked submit')
-    setShowSegments(true)
+  const handleGuessSubmit = () => {
+    console.log('commit-needle')
+    socket.emit('commit-needle')
   }
+
   const handleClueSubmit = ({ value }) => {
-    console.log('clue submitted:', value)
-    setClueSubmitted(true);
-    setClue(value)
+    console.log('submit-clue', value)
+    socket.emit('submit-clue', value)
   }
+
+  const showSegments = isPsychic || target
 
   return (
     <main>
@@ -61,7 +62,7 @@ export default function Home() {
               fluidWidth={true}
               needleColor={'#D64621'}
               needleTransitionDuration={0}
-              customSegmentStops={showSegments ? generateSegments(40) : [0, 100]}
+              customSegmentStops={showSegments ? generateSegments(target) : [0, 100]}
               segmentColors={showSegments ? ['#F5F3EF', '#FF653E', '#F6BA3F', '#5EC5F1', '#F6BA3F', '#FF653E', '#F5F3EF'] : ['#5EC5F1']}
             />
           </div>
@@ -73,21 +74,30 @@ export default function Home() {
             {!isPsychic &&
               <div>
                 <RangeSlider />
-                <div className='absolute right-16' style={{ top: '-18px' }}>
-                  <Button onClick={handleClick}>Submit</Button>
-                </div>
+                {
+                  clue &&
+                  <div className='absolute right-16' style={{ top: '-18px' }}>
+                    <Button onClick={handleGuessSubmit}>Submit</Button>
+                  </div>
+                }
               </div>
             }
 
-            {isPsychic && !clueSubmitted &&
+            {isPsychic && !clue &&
               <div className='mx-auto'>
                 <Form label="Your Clue" buttonText='Share Clue' onSubmit={handleClueSubmit} />
               </div>
             }
 
-            {isPsychic && clueSubmitted &&
+            {isPsychic && clue &&
               <div className='mx-auto'>
                 <ReadOnlyInput label="Your Clue" value={clue} />
+              </div>
+            }
+
+            {!isPsychic && clue &&
+              <div className='mx-auto mt-12'>
+                <ReadOnlyInput light label="Clue" value={clue} />
               </div>
             }
 
@@ -99,12 +109,17 @@ export default function Home() {
         console.log('end-game')
         setGameStarted(false)
         setNeedleGrabbed(false)
-      }}>endgame</button>
+      }}>end-game</button>
 
       <button className="text-white" onClick={() => {
         socket.emit('release-needle')
         console.log('release-needle')
       }}>release-needle</button>
+
+      <button className="text-white" onClick={() => {
+        socket.emit('end-round')
+        console.log('end-round')
+      }}>end-round</button>
     </main>
   )
 }
