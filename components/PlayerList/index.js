@@ -32,7 +32,7 @@ const PlayerList = () => {
             <div className='relative border-t-2 border-indigo-200 py-1'>
               {editing && isMe
                 ? <div>
-                  <input className="border py-3 px-3 text-grey-darkest rounded w-64 mr-4" value={value} type="text" onChange={e => setValue(e.target.value)} />
+                  <input maxLength="10" className="border py-3 px-3 text-grey-darkest rounded w-64 mr-4" value={value} type="text" onChange={e => setValue(e.target.value)} />
                   <div className='absolute' style={{ top: 3, right: 5 }} onClick={handleNameChange}>
                     <Image src={arrow} alt='avatar' />
                   </div>
