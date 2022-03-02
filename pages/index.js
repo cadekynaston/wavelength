@@ -13,7 +13,21 @@ const ReactSpeedometer = dynamic(
 
 
 export default function Home() {
-  const { gameStarted, setSocket, setPsychicId, setClue, socket, setPlayers, setGameStarted, setConcepts, setNeedleGrabbed, setPointerPosition, setTarget } = useAppContext()
+
+  const {
+    gameStarted,
+    setSocket,
+    setPsychicId,
+    setClue,
+    socket,
+    setPlayers,
+    setGameStarted,
+    setConcepts,
+    setNeedleGrabbed,
+    setPointerPosition,
+    setTarget,
+    setGuessSubmitted,
+  } = useAppContext()
 
 
   useEffect(() => {
@@ -40,6 +54,9 @@ export default function Home() {
         setGameStarted(true)
         setConcepts(data.concepts)
         setPsychicId(data.psychic)
+        setClue(undefined)
+        setGuessSubmitted(false)
+        setTarget(0)
       })
 
       socket.on('needle-grabbed', (data) => {
@@ -72,6 +89,7 @@ export default function Home() {
 
       socket.on('round-ended', (data) => {
         console.log('round-ended', data)
+        setGuessSubmitted(true)
         setTarget(50)
       })
 

@@ -21,10 +21,14 @@ const InfoPane = () => {
     helpText = 'See the results!'
   }
   if (!isPsychic && guessSubmitted) {
-    helpText = 'See the results!'
-  }
-  if (!isPsychic && clue) {
+    helpText = 'Keep track of the points your team has earned.'
+  } else if (!isPsychic && clue) {
     helpText = 'Drag the slider to where you think the psychic is expecting the target area.'
+  }
+
+  const handleClickEvent = () => {
+    console.log('start-round')
+    socket.emit('start-round')
   }
 
   return (
@@ -41,7 +45,7 @@ const InfoPane = () => {
       {
         guessSubmitted &&
         <div className=''>
-          <Button onClick={() => { console.log('next round') }}>Next Round</Button>
+          <Button onClick={handleClickEvent}>Next Round</Button>
         </div>
       }
     </div>
