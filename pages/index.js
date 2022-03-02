@@ -59,6 +59,11 @@ export default function Home() {
         console.log('needle-moved', data)
         setPointerPosition(data * 100)
       })
+
+      socket.on('game-ended', () => {
+        console.log('game-ended')
+        setGameStarted(false)
+      })
     }
   }, [socket]);
 
