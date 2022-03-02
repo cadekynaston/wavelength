@@ -104,18 +104,13 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <button className="text-white" onClick={() => {
+      <button className="" onClick={() => {
         socket.emit('end-game')
         console.log('end-game')
         setGameStarted(false)
         setNeedleGrabbed(false)
       }}>end-game</button>
 
-
-      <button className="text-white" onClick={() => {
-        socket.emit('end-round')
-        console.log('end-round')
-      }}>end-round</button>
     </main>
   )
 }

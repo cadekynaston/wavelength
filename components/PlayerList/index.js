@@ -7,7 +7,7 @@ import edit from '../../public/avatars/edit.svg'
 import arrow from '../../public/avatars/arrow.svg'
 
 const PlayerList = () => {
-  const { players, socket, psychicId } = useAppContext()
+  const { players, socket, psychicId, gameStarted } = useAppContext()
   const [editing, setEditing] = useState(false)
   const me = players.find(player => player.id === socket.id)
 
@@ -52,6 +52,13 @@ const PlayerList = () => {
                   }
 
                 </div>
+              }
+
+              {
+                gameStarted &&
+                <span className='absolute text-white' style={{ top: 15, right: -25 }}>
+                  {player.score}
+                </span>
               }
 
             </div>
